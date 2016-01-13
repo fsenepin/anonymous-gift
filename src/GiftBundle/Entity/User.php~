@@ -42,6 +42,20 @@ class User
      */
     private $email;
 
+    /**
+    * @ORM\OneToMany(targetEntity="Event", mappedBy="owner")
+    */
+    private $events;
+
+    /**
+    * @ORM\OneToMany(targetEntity="UserEvent", mappedBy="user")
+    */
+    private $userEvents;
+
+    /**
+    * @ORM\OneToMany(targetEntity="UserEvent", mappedBy="receivedUser")
+    */
+    private $ReceivedUserEvents;
 
     /**
      * Get id
@@ -125,4 +139,3 @@ class User
         return $this->email;
     }
 }
-

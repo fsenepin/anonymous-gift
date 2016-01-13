@@ -38,7 +38,8 @@ class Event
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="owner", type="object")
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
      */
     private $owner;
 
@@ -63,6 +64,10 @@ class Event
      */
     private $sharedToken;
 
+    /**
+    * @ORM\OneToMany(targetEntity="UserEvent", mappedBy="event")
+    */
+    private $userEvents;
 
     /**
      * Get id
@@ -218,4 +223,3 @@ class Event
         return $this->sharedToken;
     }
 }
-

@@ -48,6 +48,16 @@ class User
     private $events;
 
     /**
+    * @ORM\OneToMany(targetEntity="UserEvent", mappedBy="user")
+    */
+    private $userEvents;
+
+    /**
+    * @ORM\OneToMany(targetEntity="UserEvent", mappedBy="receivedUser")
+    */
+    private $ReceivedUserEvents;
+
+    /**
      * Get id
      *
      * @return int
@@ -127,5 +137,116 @@ class User
     public function getEmail()
     {
         return $this->email;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->userEvents = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ReceivedUserEvents = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add event
+     *
+     * @param \GiftBundle\Entity\Event $event
+     *
+     * @return User
+     */
+    public function addEvent(\GiftBundle\Entity\Event $event)
+    {
+        $this->events[] = $event;
+
+        return $this;
+    }
+
+    /**
+     * Remove event
+     *
+     * @param \GiftBundle\Entity\Event $event
+     */
+    public function removeEvent(\GiftBundle\Entity\Event $event)
+    {
+        $this->events->removeElement($event);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * Add userEvent
+     *
+     * @param \GiftBundle\Entity\UserEvent $userEvent
+     *
+     * @return User
+     */
+    public function addUserEvent(\GiftBundle\Entity\UserEvent $userEvent)
+    {
+        $this->userEvents[] = $userEvent;
+
+        return $this;
+    }
+
+    /**
+     * Remove userEvent
+     *
+     * @param \GiftBundle\Entity\UserEvent $userEvent
+     */
+    public function removeUserEvent(\GiftBundle\Entity\UserEvent $userEvent)
+    {
+        $this->userEvents->removeElement($userEvent);
+    }
+
+    /**
+     * Get userEvents
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserEvents()
+    {
+        return $this->userEvents;
+    }
+
+    /**
+     * Add receivedUserEvent
+     *
+     * @param \GiftBundle\Entity\UserEvent $receivedUserEvent
+     *
+     * @return User
+     */
+    public function addReceivedUserEvent(\GiftBundle\Entity\UserEvent $receivedUserEvent)
+    {
+        $this->ReceivedUserEvents[] = $receivedUserEvent;
+
+        return $this;
+    }
+
+    /**
+     * Remove receivedUserEvent
+     *
+     * @param \GiftBundle\Entity\UserEvent $receivedUserEvent
+     */
+    public function removeReceivedUserEvent(\GiftBundle\Entity\UserEvent $receivedUserEvent)
+    {
+        $this->ReceivedUserEvents->removeElement($receivedUserEvent);
+    }
+
+    /**
+     * Get receivedUserEvents
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReceivedUserEvents()
+    {
+        return $this->ReceivedUserEvents;
     }
 }

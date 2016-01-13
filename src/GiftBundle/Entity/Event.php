@@ -64,6 +64,10 @@ class Event
      */
     private $sharedToken;
 
+    /**
+    * @ORM\OneToMany(targetEntity="UserEvent", mappedBy="event")
+    */
+    private $userEvents;
 
     /**
      * Get id
@@ -217,5 +221,46 @@ class Event
     public function getSharedToken()
     {
         return $this->sharedToken;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->userEvents = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add userEvent
+     *
+     * @param \GiftBundle\Entity\UserEvent $userEvent
+     *
+     * @return Event
+     */
+    public function addUserEvent(\GiftBundle\Entity\UserEvent $userEvent)
+    {
+        $this->userEvents[] = $userEvent;
+
+        return $this;
+    }
+
+    /**
+     * Remove userEvent
+     *
+     * @param \GiftBundle\Entity\UserEvent $userEvent
+     */
+    public function removeUserEvent(\GiftBundle\Entity\UserEvent $userEvent)
+    {
+        $this->userEvents->removeElement($userEvent);
+    }
+
+    /**
+     * Get userEvents
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserEvents()
+    {
+        return $this->userEvents;
     }
 }
