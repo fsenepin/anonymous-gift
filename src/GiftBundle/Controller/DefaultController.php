@@ -4,14 +4,16 @@ namespace GiftBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller
 {
     /**
      * @Route("/")
+     * @Template("GiftBundle:Default:home.html.twig")
      */
-    public function indexAction()
+    public function homeAction()
     {
-        return $this->render('GiftBundle:Default:index.html.twig');
+        return array('page_title' => "Home");
     }
 }

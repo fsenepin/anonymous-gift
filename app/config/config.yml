@@ -37,6 +37,14 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
+#Configuration to activate dump function for production
+services:
+  symplenetwork:
+    class:		Twig_Extension_Debug
+    tags:
+      - { name: 'twig.extension' }
+
+
 # Doctrine Configuration
 doctrine:
     dbal:
